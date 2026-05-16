@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "594620927040",
+    "project_id": "regali-dxme",
+    "storage_bucket": "regali-dxme.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594620927040:android:21cba13285cc8e53f223a5",
+        "android_client_info": {
+          "package_name": "com.example.regali"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv8GTfc2AhCYNpDtlNuU9pCwk0FyB2R9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+//SETTING
+import '../globals.dart';
+
 class MyFormTitolo extends StatelessWidget {
   final String titolo;
   final bool isRequired;
@@ -9,13 +12,13 @@ class MyFormTitolo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      padding: const EdgeInsets.only(bottom: 5),
+      padding: const EdgeInsets.only(bottom: 8),
       child: RichText(
         text: TextSpan(
           style: const TextStyle(
-            fontFamily: 'Roboto',
+            fontFamily: 'Poppins',
             fontSize: 16,
-            color: Colors.black,
+            color: bgBlack,
           ),
           children: [
             TextSpan(text: '$titolo '),

@@ -38,9 +38,33 @@ class Prodotti {
         'url': prodotto.url,
         'prezzo': prodotto.prezzo,
         'isChecked': prodotto.isChecked,
+        'dataCreazione': Timestamp.fromDate(DateTime.now()),
+        'dataUpdate': Timestamp.fromDate(DateTime.now()),
       });
     } catch (error) {
       throw Exception('Errore nell\'aggiunta del prodotto: $error');
+    }
+  }
+
+  /// Modifica prodotto esistente
+  Future<void> updateProdotto(Prodotto prodotto) async {
+    try {
+      final documento = collection
+          .doc(prodotto.uid)
+          .collection("prodotti")
+          .doc(prodotto.idProdotto);
+
+      await documento.update({
+        'nome': prodotto.nome,
+        'immagineUrl': prodotto.immagineUrl,
+        'descrizione': prodotto.descrizione,
+        'url': prodotto.url,
+        'prezzo': prodotto.prezzo,
+        'isChecked': prodotto.isChecked,
+        'dataUpdate': Timestamp.fromDate(DateTime.now()),
+      });
+    } catch (error) {
+      throw Exception('Errore nell\'aggiornamento del prodotto: $error');
     }
   }
 }

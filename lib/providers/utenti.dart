@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class Utenti extends ChangeNotifier {
   CollectionReference collection = FirebaseFirestore.instance.collection(
-    'users',
+    'utenti',
   );
 
   Stream<Utente> fetch(String id) {

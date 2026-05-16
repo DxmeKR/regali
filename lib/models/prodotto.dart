@@ -9,6 +9,8 @@ class Prodotto {
   final String? url;
   final double? prezzo;
   final bool isChecked;
+  final DateTime dataCreazione;
+  final DateTime dataUpdate;
 
   Prodotto({
     required this.uid,
@@ -19,6 +21,8 @@ class Prodotto {
     this.url,
     this.prezzo,
     this.isChecked = false,
+    required this.dataCreazione,
+    required this.dataUpdate,
   });
 
   factory Prodotto.imposta(DocumentSnapshot doc, String uid) {
@@ -31,6 +35,8 @@ class Prodotto {
       url: doc['url'],
       prezzo: doc['prezzo'],
       isChecked: doc['isChecked'] ?? false,
+      dataCreazione: (doc['dataCreazione'] as Timestamp).toDate(),
+      dataUpdate: (doc['dataUpdate'] as Timestamp).toDate(),
     );
   }
 }

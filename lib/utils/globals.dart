@@ -18,3 +18,24 @@ const Color bgTextFieldChat = Color(0xFFf8f8f8);
 const Color borderColor = Color(0xff633C2A);
 
 const double borderRadius = 8;
+
+const Color primaryColor = Color(0xFF1B4332);
+const Color secondaryColor = Color(0xFF74C69D);
+const Color tertiaryColor = Color(0xFFD8F3DC);
+const Color neutralColor = Color(0xFFF8F9FA);
+const Color redButton = Color(0xFFBA1A1A);
+const Color grey = Color(0xFF52525B);
+
+const Color textPrimary = Color(0xFF064E3B);
+
+//color -> background
+
+const Color bgHeadSlider = Color.fromRGBO(161, 215, 111, 1);
+//color -> text
+
+//NEW
+const Color bgGreen = Color(0xFF51af5b);
+const Color bgGreenHover = Color(0xFF2a8033);
+const Color bgGreenOpaco = Color(0xFFedf7ee);
+const Color bgBlack = Color(0xFF262626);
+const Color bgBlackHover = Color(0xFF979797);

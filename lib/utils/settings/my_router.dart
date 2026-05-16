@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import '../../models/prodotto.dart';
+import '../../screens/admin/admin.dart';
 import '../../screens/auth/login.dart';
 import '../../screens/home/home.dart';
 import '../../screens/prodotto/prodotto_page.dart';
@@ -93,7 +94,7 @@ final GoRouter myRouter = GoRouter(
     //   },
     // ),
 
-    //Archivio
+    //Prodotto
     GoRoute(
       path: ProdottoPage.routeName,
       builder: (context, state) {
@@ -111,6 +112,8 @@ final GoRouter myRouter = GoRouter(
 
               "https://kinsta.com/wp-content/uploads/2020/08/tiger-jpg.jpg",
             ],
+            dataCreazione: DateTime.now(),
+            dataUpdate: DateTime.now(),
           ),
         );
 
@@ -119,6 +122,13 @@ final GoRouter myRouter = GoRouter(
         // filtro.setAnni(convento.idConvento);
 
         // );
+      },
+    ),
+
+    GoRoute(
+      path: GiftCmsPage.routeName,
+      builder: (context, state) {
+        return GiftCmsPage();
       },
     ),
   ],

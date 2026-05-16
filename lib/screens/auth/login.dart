@@ -8,9 +8,9 @@ import '../../providers/auth.dart';
 //FUNCTION
 
 //WIDGET
+import '../../utils/form/my_text_formfield.dart';
 import '../../utils/settings/my_button.dart';
 import '../../utils/settings/my_scaffold_auth.dart';
-import '../../utils/settings/my_text_formfield.dart';
 import '../../utils/widget/alert_dialog.dart';
 import '../functions/esapce_char_special.dart';
 
@@ -67,7 +67,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 // email
                 MyTextFormField(
-                  isRectangular: true,
                   hintText: 'Email',
                   helperText: '',
                   keyboardType: TextInputType.emailAddress,
@@ -92,7 +91,6 @@ class _LoginPageState extends State<LoginPage> {
 
                 // password
                 MyTextFormField(
-                  isRectangular: true,
                   hintText: 'Password',
                   helperText: '',
                   isPassword: true,
