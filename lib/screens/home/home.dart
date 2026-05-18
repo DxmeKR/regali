@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
+import '../../models/prodotto.dart';
 import '../../utils/globals.dart';
 import '../../utils/settings/my_button.dart';
 import '../../utils/settings/my_scaffold.dart';
@@ -13,6 +15,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Prodotto> prodotti = Provider.of<List<Prodotto>>(
+      context,
+      listen: true,
+    );
     return MyScaffold(
       body: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 1100),
@@ -32,7 +38,7 @@ class HomePage extends StatelessWidget {
             MyButton(
               text: 'Aggiungi regalo',
               onPressed: () {
-                context.go(GiftCmsPage.routeName);
+                context.go(AdminScreen.routeName);
               },
             ),
             // ListView dei regali da inserire
@@ -42,11 +48,8 @@ class HomePage extends StatelessWidget {
                   horizontal: MediaQuery.of(context).size.width > 800 ? 32 : 16,
                   vertical: 8,
                 ),
-                itemCount: 5,
+                itemCount: prodotti.length,
                 shrinkWrap: true,
-
-                // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                //   crossAxisCount: 2,
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 250,
                   crossAxisSpacing: 10,
@@ -54,7 +57,7 @@ class HomePage extends StatelessWidget {
                   childAspectRatio: 1.1,
                 ),
                 itemBuilder: (context, index) {
-                  return ListaSingola();
+                  return ListaSingola(prodotto: prodotti[index]);
                 },
               ),
             ),

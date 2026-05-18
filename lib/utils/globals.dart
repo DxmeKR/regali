@@ -39,3 +39,12 @@ const Color bgGreenHover = Color(0xFF2a8033);
 const Color bgGreenOpaco = Color(0xFFedf7ee);
 const Color bgBlack = Color(0xFF262626);
 const Color bgBlackHover = Color(0xFF979797);
+
+const Color kPrimary = Color(0xFF6C63FF);
+const Color kAccent = Color(0xFFFFB703);
+const Color kCardBg = Color(0xFF0F1115);
+const Color kMutedText = Color(0xFF9AA0A6);
+const Color kAvailable = Color(0xFF2ECC71);
+const Color kUnavailable = Color(0xFFFF5C5C);
+const Color kBorder = Color.fromRGBO(255, 255, 255, 0.04);
+const double kImageSize = 100;

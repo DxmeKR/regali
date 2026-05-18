@@ -11,7 +11,6 @@ class MyScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        spacing: 32,
         children: [
           BannerHead(),
           Expanded(child: body),

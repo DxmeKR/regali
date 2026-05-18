@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
-import '../../models/prodotto.dart';
+import 'package:provider/provider.dart';
+import '../../providers/auth.dart';
 import '../../screens/admin/admin.dart';
 import '../../screens/auth/login.dart';
 import '../../screens/home/home.dart';
@@ -14,121 +15,40 @@ final GoRouter myRouter = GoRouter(
     GoRoute(
       path: LoginPage.routeName,
       builder: (context, state) => const LoginPage(),
-      // redirect: (context, state) {
-      //   // Se l'utente è già loggato, reindirizza alla home
-      //   // if (Provider.of<Auth>(context, listen: false).isLoggedIn) {
-      //   //   return AdminPage.routeName;
-      //   // }
-      //   return null; // Altrimenti, resta sulla pagina di login
-      // },
+      redirect: (context, state) {
+        if (Provider.of<Auth>(context, listen: false).isAuth) {
+          return AdminScreen.routeName;
+        }
+        return null;
+      },
     ),
     // PRENOTAZIONE MESSE
     GoRoute(
       path: HomePage.routeName,
       builder: (context, state) {
-        // final int currentAnno = DateTime.now().year;
-        // final int currentMese = DateTime.now().month;
-        // MessePrenotate messe = Provider.of<MessePrenotate>(
-        //   context,
-        //   listen: true,
-        // );
-        // List<MessaPrenotata> messePrenotate = Provider.of<List<MessaPrenotata>>(
-        //   context,
-        //   listen: true,
-        // );
-        // messe.setLista(messePrenotate);
-        // messe.setMessePrenotateMonth(
-        //   messePrenotate
-        //       .where(
-        //         (messa) =>
-        //             messa.data.month == currentMese &&
-        //             messa.data.year == currentAnno,
-        //       )
-        //       .toList(),
-        // );
-
-        // messe.setMesseNonCelebrate(
-        //   messePrenotate
-        //       .where((messa) => messa.idCelebrate.length < messa.numeroMesse)
-        //       .toList(),
-        // );
-
         return HomePage();
       },
     ),
-    // PRENOTAZIONE MESSE con Anno e Mese
-    // GoRoute(
-    //   path: "${PrenotazioneMesseScreen.routeName}/:anno/:mese",
-    //   builder: (context, state) {
-    //     final params = state.pathParameters;
-    //     final String anno = params['anno'] ?? DateTime.now().year.toString();
-    //     final String mese = params['mese'] ?? DateTime.now().month.toString();
-    //     MessePrenotate messe = Provider.of<MessePrenotate>(
-    //       context,
-    //       listen: true,
-    //     );
-    //     List<MessaPrenotata> messePrenotate = Provider.of<List<MessaPrenotata>>(
-    //       context,
-    //       listen: true,
-    //     );
-    //     messe.setLista(messePrenotate);
-    //     messe.setMessePrenotateMonth(
-    //       messePrenotate
-    //           .where(
-    //             (messa) =>
-    //                 messa.data.month == int.parse(mese) &&
-    //                 messa.data.year == int.parse(anno),
-    //           )
-    //           .toList(),
-    //     );
-
-    //     messe.setMesseNonCelebrate(
-    //       messePrenotate
-    //           .where((messa) => messa.idCelebrate.length < messa.numeroMesse)
-    //           .toList(),
-    //     );
-    //     return PrenotazioneMesseScreen(
-    //       anno: int.parse(anno),
-    //       mese: int.parse(mese),
-    //     );
-    //   },
-    // ),
 
     //Prodotto
     GoRoute(
       path: ProdottoPage.routeName,
       builder: (context, state) {
-        return ProdottoPage(
-          prodotto: Prodotto(
-            uid: "123",
-            idProdotto: "1",
-            nome: "Prodotto 1",
-            descrizione: "Descrizione del prodotto 1",
-            isChecked: false,
-            prezzo: 2.0,
-            url: "https://example.com/prodotto",
-            immagineUrl: [
-              'https://thumbs.dreamstime.com/b/superficie-praticante-il-surfing-dell-acqua-onda-di-oceano-mare-124362369.jpg',
-
-              "https://kinsta.com/wp-content/uploads/2020/08/tiger-jpg.jpg",
-            ],
-            dataCreazione: DateTime.now(),
-            dataUpdate: DateTime.now(),
-          ),
-        );
-
-        // FiltriArchivio filtro = Provider.of<FiltriArchivio>(context);
-        // Convento convento = Provider.of<Convento>(context);
-        // filtro.setAnni(convento.idConvento);
-
-        // );
+        return ProdottoPage();
       },
     ),
 
     GoRoute(
-      path: GiftCmsPage.routeName,
+      path: AdminScreen.routeName,
       builder: (context, state) {
-        return GiftCmsPage();
+        return AdminScreen();
+      },
+      redirect: (context, state) {
+        // se non autenticato, vai alla pagina di login (usata solo per accedere all'admin)
+        if (!Provider.of<Auth>(context, listen: false).isAuth) {
+          return LoginPage.routeName;
+        }
+        return null;
       },
     ),
   ],

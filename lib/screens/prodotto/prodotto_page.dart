@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/prodotto.dart';
 import '../../utils/settings/my_button.dart';
 import '../../utils/settings/my_scaffold.dart';
-import './widget/carosello_foto.dart';
 
 class ProdottoPage extends StatefulWidget {
-  final Prodotto prodotto;
   static const routeName = '/prodotto';
 
-  const ProdottoPage({super.key, required this.prodotto});
+  const ProdottoPage({super.key});
 
   @override
   State<ProdottoPage> createState() => _ProdottoPageState();
@@ -18,13 +17,34 @@ class ProdottoPage extends StatefulWidget {
 class _ProdottoPageState extends State<ProdottoPage> {
   @override
   Widget build(BuildContext context) {
+    Prodotto prodotto = Provider.of<Prodotto>(context, listen: false);
     return MyScaffold(
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // 📸 CAROSELLO FOTO
-            CaroselloFoto(prodotto: widget.prodotto),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.network(
+                prodotto.immagineUrl ?? '',
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: 300,
+                errorBuilder: (_, _, _) {
+                  return Container(
+                    color: Colors.grey[200],
+                    width: double.infinity,
+                    height: 300,
+                    child: const Icon(
+                      Icons.broken_image,
+                      size: 50,
+                      color: Colors.grey,
+                    ),
+                  );
+                },
+              ),
+            ),
             // 📦 INFO PRODOTTO
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -33,19 +53,17 @@ class _ProdottoPageState extends State<ProdottoPage> {
                 children: [
                   // Nome
                   Text(
-                    widget.prodotto.nome,
+                    prodotto.nome,
                     style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
 
-                  const SizedBox(height: 8),
-
                   // Prezzo
-                  if (widget.prodotto.prezzo != null)
+                  if (prodotto.prezzo != null)
                     Text(
-                      '€${widget.prodotto.prezzo!.toStringAsFixed(2).replaceAll(".", ",")}',
+                      '€${prodotto.prezzo!.toStringAsFixed(2).replaceAll(".", ",")}',
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -53,19 +71,15 @@ class _ProdottoPageState extends State<ProdottoPage> {
                       ),
                     ),
 
-                  const SizedBox(height: 12),
-
                   // Descrizione
-                  if (widget.prodotto.descrizione != null)
+                  if (prodotto.descrizione != null)
                     Text(
-                      widget.prodotto.descrizione!,
+                      prodotto.descrizione!,
                       style: TextStyle(fontSize: 16, color: Colors.grey[700]),
                     ),
 
-                  const SizedBox(height: 24),
-
                   // 🔘 BOTTONE PRINCIPALE
-                  if (widget.prodotto.url != null)
+                  if (prodotto.url != null)
                     SizedBox(
                       width: double.infinity,
                       child: MyButton(
@@ -79,8 +93,6 @@ class _ProdottoPageState extends State<ProdottoPage> {
                 ],
               ),
             ),
-
-            const SizedBox(height: 24),
           ],
         ),
       ),

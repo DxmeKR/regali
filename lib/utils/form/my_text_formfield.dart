@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 
 //SETTING
 import '../globals.dart';
@@ -201,55 +200,55 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
                 ),
             validator: widget.validator,
             onFieldSubmitted: widget.onFieldSubmitted,
-            onTap: widget.isDate
-                ? () async {
-                    DateTime? pickedDate = await showDatePicker(
-                      keyboardType: const TextInputType.numberWithOptions(
-                        decimal: false,
-                        signed: false,
-                      ),
-                      context: context,
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime.now(),
-                      // locale: const Locale('it', 'IT'),
-                      builder: (BuildContext context, Widget? child) {
-                        return Theme(
-                          data: ThemeData.light().copyWith(
-                            colorScheme: const ColorScheme.light(
-                              //bg color
-                              surface: Color(0xffE2F3D2),
-                              // Colore del testo in generale
-                              onSurface: Color(0xff1D1B20),
-                              // Colore del num selezionato
-                              onPrimary: Colors.white,
-                              // Colore del cerchio di selezione
-                              primary: Color(0xff59763D),
-                            ),
-                            textButtonTheme: TextButtonThemeData(
-                              style: TextButton.styleFrom(
-                                // Colore dei pulsanti "OK" e "CANCEL"
-                                foregroundColor: const Color(0xff59763D),
-                              ),
-                            ),
-                          ),
-                          child: child!,
-                        );
-                      },
-                    );
+            // onTap: widget.isDate
+            // ? () async {
+            //     DateTime? pickedDate = await showDatePicker(
+            //       keyboardType: const TextInputType.numberWithOptions(
+            //         decimal: false,
+            //         signed: false,
+            //       ),
+            //       context: context,
+            //       firstDate: DateTime(1900),
+            //       lastDate: DateTime.now(),
+            //       // locale: const Locale('it', 'IT'),
+            //       builder: (BuildContext context, Widget? child) {
+            //         return Theme(
+            //           data: ThemeData.light().copyWith(
+            //             colorScheme: const ColorScheme.light(
+            //               //bg color
+            //               surface: Color(0xffE2F3D2),
+            //               // Colore del testo in generale
+            //               onSurface: Color(0xff1D1B20),
+            //               // Colore del num selezionato
+            //               onPrimary: Colors.white,
+            //               // Colore del cerchio di selezione
+            //               primary: Color(0xff59763D),
+            //             ),
+            //             textButtonTheme: TextButtonThemeData(
+            //               style: TextButton.styleFrom(
+            //                 // Colore dei pulsanti "OK" e "CANCEL"
+            //                 foregroundColor: const Color(0xff59763D),
+            //               ),
+            //             ),
+            //           ),
+            //           child: child!,
+            //         );
+            //       },
+            //     );
 
-                    // if (pickedDate != null) {
-                    //   setState(() {
-                    //     widget.controller.text = DateFormat(patternDate).format(
-                    //       DateTime(
-                    //         pickedDate.year,
-                    //         pickedDate.month,
-                    //         pickedDate.day,
-                    //       ),
-                    //     );
-                    //   });
-                    // }
-                  }
-                : null,
+            // if (pickedDate != null) {
+            //   setState(() {
+            //     widget.controller.text = DateFormat(patternDate).format(
+            //       DateTime(
+            //         pickedDate.year,
+            //         pickedDate.month,
+            //         pickedDate.day,
+            //       ),
+            //     );
+            //   });
+            // }
+            //   }
+            // : null,
           ),
         ),
       ],

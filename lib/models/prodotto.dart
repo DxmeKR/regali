@@ -4,7 +4,7 @@ class Prodotto {
   final String uid;
   final String idProdotto;
   final String nome;
-  final List<String>? immagineUrl;
+  final String? immagineUrl;
   final String? descrizione;
   final String? url;
   final double? prezzo;
@@ -26,17 +26,21 @@ class Prodotto {
   });
 
   factory Prodotto.imposta(DocumentSnapshot doc, String uid) {
+    final data = doc.data() as Map<String, dynamic>? ?? {};
     return Prodotto(
       uid: uid,
       idProdotto: doc.id,
-      nome: doc['nome'],
-      immagineUrl: doc['immagineUrl'],
-      descrizione: doc['descrizione'],
-      url: doc['url'],
-      prezzo: doc['prezzo'],
-      isChecked: doc['isChecked'] ?? false,
-      dataCreazione: (doc['dataCreazione'] as Timestamp).toDate(),
-      dataUpdate: (doc['dataUpdate'] as Timestamp).toDate(),
+      nome: data['nome'] as String? ?? '',
+      immagineUrl: data['immagineUrl'] as String? ?? '',
+
+      descrizione: data['descrizione'] as String?,
+      url: data['url'] as String?,
+      prezzo: data['prezzo'] != null
+          ? (data['prezzo'] as num).toDouble()
+          : null,
+      isChecked: data['isChecked'] as bool? ?? false,
+      dataCreazione: (data['dataCreazione'] as Timestamp).toDate(),
+      dataUpdate: (data['dataUpdate'] as Timestamp).toDate(),
     );
   }
 }

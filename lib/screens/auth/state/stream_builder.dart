@@ -34,7 +34,6 @@ class StreamBuilders extends StatelessWidget {
                   body: Loading(),
                 );
               } else if (snapshot.hasError) {
-                // print("ERRORE NEGLI STREAM: ${snapshot.error}");
                 return Scaffold(
                   backgroundColor: Colors.white,
                   body: Text(
