@@ -148,4 +148,11 @@ class MyButtonColor {
     fontColorHover: Colors.white,
     borderColorHover: itemSelected,
   );
+  static const MyButtonColor rosso = MyButtonColor(
+    backgroundColor: Colors.white,
+    fontColor: Colors.red,
+    backgroundColorHover: Colors.red,
+    fontColorHover: Colors.white,
+    borderColorHover: Colors.red,
+  );
 }

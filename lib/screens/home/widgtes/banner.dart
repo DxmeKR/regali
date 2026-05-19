@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../utils/globals.dart';
+
 class BannerHead extends StatelessWidget {
   const BannerHead({super.key});
 
@@ -8,7 +10,7 @@ class BannerHead extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 150,
+      height: heightBanner,
       decoration: BoxDecoration(
         color: Colors.brown,
         borderRadius: BorderRadius.circular(8),

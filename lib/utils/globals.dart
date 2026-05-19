@@ -18,7 +18,7 @@ const Color bgTextFieldChat = Color(0xFFf8f8f8);
 const Color borderColor = Color(0xff633C2A);
 
 const double borderRadius = 8;
-
+const double heightBanner = 150;
 const Color primaryColor = Color(0xFF1B4332);
 const Color secondaryColor = Color(0xFF74C69D);
 const Color tertiaryColor = Color(0xFFD8F3DC);
@@ -40,6 +40,7 @@ const Color bgGreenOpaco = Color(0xFFedf7ee);
 const Color bgBlack = Color(0xFF262626);
 const Color bgBlackHover = Color(0xFF979797);
 
+const Color marrone = Color.fromARGB(255, 231, 199, 192);
 const Color kPrimary = Color(0xFF6C63FF);
 const Color kAccent = Color(0xFFFFB703);
 const Color kCardBg = Color(0xFF0F1115);

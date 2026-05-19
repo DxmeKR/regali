@@ -9,7 +9,7 @@ import '../../utils/settings/my_button.dart';
 import '../../utils/settings/my_scaffold.dart';
 // Widgets
 import './widget/card_lista.dart';
-import './widget/carica_prodotto.dart';
+import 'widget/create_update_prodotto.dart';
 
 class AdminScreen extends StatefulWidget {
   static const String routeName = '/admin/home';
@@ -41,7 +41,6 @@ class _AdminScreenState extends State<AdminScreen> {
                 children: [
                   // Header
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,6 +61,7 @@ class _AdminScreenState extends State<AdminScreen> {
                           ),
                         ],
                       ),
+                      Spacer(),
                       MyButton(
                         onPressed: () => CreateUpdateProdotto.show(context),
                         icon: Icon(Icons.add),
@@ -69,6 +69,20 @@ class _AdminScreenState extends State<AdminScreen> {
                         isLoading: isLoading,
                         width: 120,
                         height: 40,
+                        margin: EdgeInsets.zero,
+                      ),
+                      SizedBox(width: 16),
+                      MyButton(
+                        onPressed: () =>
+                            Provider.of<Auth>(context, listen: false).logout(),
+                        icon: Icon(Icons.logout),
+                        text: "",
+                        backTextColor: MyButtonColor.rosso,
+                        isLoading: isLoading,
+                        width: 50,
+                        height: 40,
+                        padding: EdgeInsets.zero,
+                        margin: EdgeInsets.zero,
                       ),
                     ],
                   ),

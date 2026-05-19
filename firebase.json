@@ -1,1 +1,33 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"regali-dxme","appId":"1:594620927040:android:21cba13285cc8e53f223a5","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"regali-dxme","configurations":{"android":"1:594620927040:android:21cba13285cc8e53f223a5","ios":"1:594620927040:ios:dd21b5fa3615a364f223a5","macos":"1:594620927040:ios:dd21b5fa3615a364f223a5","web":"1:594620927040:web:355ad2a480aa8992f223a5","windows":"1:594620927040:web:747ed1023ed182b8f223a5"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "regali-dxme",
+          "appId": "1:594620927040:android:21cba13285cc8e53f223a5",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "regali-dxme",
+          "configurations": {
+            "android": "1:594620927040:android:21cba13285cc8e53f223a5",
+            "ios": "1:594620927040:ios:dd21b5fa3615a364f223a5",
+            "macos": "1:594620927040:ios:dd21b5fa3615a364f223a5",
+            "web": "1:594620927040:web:355ad2a480aa8992f223a5",
+            "windows": "1:594620927040:web:747ed1023ed182b8f223a5"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "n",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

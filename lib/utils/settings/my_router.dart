@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import '../../models/prodotto.dart';
 import '../../providers/auth.dart';
 import '../../screens/admin/admin.dart';
 import '../../screens/auth/login.dart';
@@ -32,9 +33,11 @@ final GoRouter myRouter = GoRouter(
 
     //Prodotto
     GoRoute(
-      path: ProdottoPage.routeName,
+      path: '${ProdottoPage.routeName}/:id',
       builder: (context, state) {
-        return ProdottoPage();
+        final id = state.pathParameters['id'];
+        final Prodotto? prodotto = state.extra as Prodotto?;
+        return ProdottoPage(prodotto: prodotto, idProdotto: id);
       },
     ),
 

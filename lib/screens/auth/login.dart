@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 //PROVIDER
@@ -13,6 +14,7 @@ import '../../utils/settings/my_button.dart';
 import '../../utils/settings/my_scaffold_auth.dart';
 import '../../utils/widget/alert_dialog.dart';
 import '../../utils/functions/esapce_char_special.dart';
+import '../admin/admin.dart';
 
 //SCREEN
 
@@ -53,66 +55,69 @@ class _LoginPageState extends State<LoginPage> {
         child: Form(
           key: _formKey,
           child: AutofillGroup(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              // mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 256.0, bottom: 48),
-                  child: Text(
-                    "ACCEDI",
-                    style: Theme.of(context).textTheme.headlineMedium,
+            child: SingleChildScrollView(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 26.0, bottom: 48),
+                    child: Text(
+                      "ACCEDI",
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
                   ),
-                ),
-                // email
-                MyTextFormField(
-                  hintText: 'Email',
-                  helperText: '',
-                  keyboardType: TextInputType.emailAddress,
-                  controller: emailTextController,
-                  focusNode: emailFocus,
-                  autofillHints: const [AutofillHints.email],
-                  onFieldSubmitted: (value) => _validateForm(),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Inserisci email';
-                    }
+                  // email
+                  MyTextFormField(
+                    hintText: 'Email',
+                    helperText: '',
+                    keyboardType: TextInputType.emailAddress,
+                    controller: emailTextController,
+                    focusNode: emailFocus,
+                    autofillHints: const [AutofillHints.email],
+                    onFieldSubmitted: (value) => _validateForm(),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Inserisci email';
+                      }
 
-                    if (!RegExp(
-                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-                    ).hasMatch(value)) {
-                      return 'Email non valida!';
-                    }
+                      if (!RegExp(
+                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+                      ).hasMatch(value)) {
+                        return 'Email non valida!';
+                      }
 
-                    return null;
-                  },
-                ),
+                      return null;
+                    },
+                  ),
 
-                // password
-                MyTextFormField(
-                  hintText: 'Password',
-                  helperText: '',
-                  isPassword: true,
-                  controller: passwordTextController,
-                  focusNode: passwordFocus,
-                  autofillHints: const [AutofillHints.password],
-                  onFieldSubmitted: (value) => _validateForm(),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Inserisci password';
-                    }
-                    return null;
-                  },
-                ),
+                  // password
+                  MyTextFormField(
+                    hintText: 'Password',
+                    helperText: '',
+                    isPassword: true,
+                    controller: passwordTextController,
+                    focusNode: passwordFocus,
+                    autofillHints: const [AutofillHints.password],
+                    onFieldSubmitted: (value) => _validateForm(),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Inserisci password';
+                      }
+                      return null;
+                    },
+                  ),
 
-                // Bottone Accedi
-                MyButton(
-                  onPressed: _validateForm,
-                  text: 'Accedi',
-                  isLoading: _isLoading,
-                ),
-              ],
+                  // Bottone Accedi
+                  MyButton(
+                    onPressed: _validateForm,
+                    text: 'Accedi',
+                    isLoading: _isLoading,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -135,6 +140,9 @@ class _LoginPageState extends State<LoginPage> {
           TextInput.finishAutofillContext();
           _isLoading = false;
         });
+        if (mounted) {
+          context.go(AdminScreen.routeName);
+        }
       } catch (e) {
         // print(e);
         if (mounted) {
