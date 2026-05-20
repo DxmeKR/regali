@@ -2,8 +2,6 @@
 deploy-functions-dev:
 	firebase deploy --only functions --project regali-dxme
 
-
-
 # WEB
 web-dev:
 	flutter build web -t lib/main.dart --dart-define=ENV=dev --release --no-tree-shake-icons
