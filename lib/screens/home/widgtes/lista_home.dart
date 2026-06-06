@@ -15,15 +15,12 @@ class ListaHome extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (prodotto != null) {
-          context.push(
-            '${ProdottoPage.routeName}/${prodotto!.idProdotto}',
-            extra: prodotto,
-          );
+          context.go('${ProdottoPage.routeName}/${prodotto!.idProdotto}');
         }
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: prodotto!.isChecked ? Colors.grey : Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: Colors.black),
           boxShadow: [

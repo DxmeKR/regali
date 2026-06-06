@@ -14,9 +14,9 @@ class Prodotti {
   Stream<List<Prodotto>> fetchAll({bool onlyAvailable = false}) {
     try {
       Query query = FirebaseFirestore.instance.collectionGroup('prodotti');
-      if (onlyAvailable) {
-        query = query.where('isChecked', isEqualTo: false);
-      }
+      // if (onlyAvailable) {
+      //   query = query.where('isChecked', isEqualTo: false);
+      // }
       return query.snapshots().map((QuerySnapshot snapshot) {
         final list = snapshot.docs.map((doc) {
           // recupera l'uid dal path: prodottoUtente/{uid}/prodotti/{docId}
@@ -45,6 +45,23 @@ class Prodotti {
     } catch (error) {
       throw Exception('Errore nel recupero del prodotto: $error');
     }
+  }
+
+  /// Recupera un singolo prodotto per idProdotto
+  Stream<Prodotto?> fetchSingle(String idProdotto) {
+    return FirebaseFirestore.instance
+        .collectionGroup('prodotti')
+        .snapshots()
+        .map((snap) {
+          try {
+            final doc = snap.docs.firstWhere((d) => d.id == idProdotto);
+
+            final uid = doc.reference.parent.parent?.id ?? '';
+            return Prodotto.imposta(doc, uid);
+          } catch (_) {
+            return null;
+          }
+        });
   }
 
   /// Aggiunge un nuovo prodotto per un utente specifico

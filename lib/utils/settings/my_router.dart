@@ -1,7 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import '../../models/prodotto.dart';
+// PROVIDER
 import '../../providers/auth.dart';
+// SCREENS
 import '../../screens/admin/admin.dart';
 import '../../screens/auth/login.dart';
 import '../../screens/home/home.dart';
@@ -32,15 +33,22 @@ final GoRouter myRouter = GoRouter(
     ),
 
     //Prodotto
+    // GoRoute(
+    //   path: '/prodotto/:id',
+    //   builder: (context, state) {
+    //     final id = state.pathParameters['id'];
+    //     final prodotto = state.extra as Prodotto?;
+
+    //     return ProdottoPage(idProdotto: id, prodotto: prodotto);
+    //   },
+    // ),
     GoRoute(
       path: '${ProdottoPage.routeName}/:id',
       builder: (context, state) {
-        final id = state.pathParameters['id'];
-        final Prodotto? prodotto = state.extra as Prodotto?;
-        return ProdottoPage(prodotto: prodotto, idProdotto: id);
+        final id = state.pathParameters['id']!;
+        return ProdottoPage(idProdotto: id);
       },
     ),
-
     GoRoute(
       path: AdminScreen.routeName,
       builder: (context, state) {

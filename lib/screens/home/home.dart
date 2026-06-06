@@ -24,8 +24,10 @@ class HomePage extends StatelessWidget {
         } else {
           final listaProdotti = snapshot.data ?? [];
           final prodottiDisponibili = listaProdotti
-              .where((p) => p.isChecked == false)
-              .toList();
+            ..sort(
+              (a, b) =>
+                  a.isChecked.toString().compareTo(b.isChecked.toString()),
+            );
           return MyScaffold(
             body: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1100),

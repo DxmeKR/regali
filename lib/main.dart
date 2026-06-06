@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import './url_strategy_mobile.dart'
+    if (dart.library.html) 'url_strategy_web.dart';
 import './providers/auth.dart';
 import './utils/globals.dart';
 import './utils/settings/app_config.dart';
@@ -11,7 +12,7 @@ import './screens/auth/state/auth_builder.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await initializeDateFormatting('it_IT');
-
+  setUrlStrategy();
   final config = await AppConfig.load();
 
   runApp(Provider<AppConfig>.value(value: config, child: const MyApp()));
