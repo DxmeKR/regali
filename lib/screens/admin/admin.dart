@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import '../../providers/auth.dart';
 // Providers
+import '../../providers/auth.dart';
 import '../../providers/prodotti.dart';
 // Utils
 import '../../utils/settings/loading.dart';
 import '../../utils/settings/my_button.dart';
 import '../../utils/settings/my_scaffold.dart';
 // Widgets
+import '../home/home.dart';
 import './widget/card_lista.dart';
-import 'widget/create_update_prodotto.dart';
+import './widget/create_update_prodotto.dart';
 
 class AdminScreen extends StatefulWidget {
   static const String routeName = '/admin/home';
@@ -42,6 +44,13 @@ class _AdminScreenState extends State<AdminScreen> {
                   // Header
                   Row(
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 18.0),
+                        child: IconButton(
+                          onPressed: () => context.go(HomePage.routeName),
+                          icon: Icon(Icons.home, color: Colors.lightBlue),
+                        ),
+                      ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

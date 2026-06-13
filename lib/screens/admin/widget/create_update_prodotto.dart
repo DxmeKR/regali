@@ -1,6 +1,6 @@
-import 'dart:io';
 import 'dart:convert';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -12,7 +12,6 @@ import '../../../providers/auth.dart';
 import '../../../providers/prodotti.dart';
 // WIDGET
 import '../../../utils/form/my_text_formfield.dart';
-import '../../../utils/functions/refactory_image.dart';
 import '../../../utils/settings/my_button.dart';
 
 class CreateUpdateProdotto extends StatefulWidget {
@@ -60,8 +59,8 @@ class _CreateUpdateProdottoState extends State<CreateUpdateProdotto> {
   final FocusNode _prezzoFocus = FocusNode();
   final ImagePicker _picker = ImagePicker();
   bool isCamera = false;
-
-  File? _selectedImage;
+  // File? _selectedImage;
+  Uint8List? _imageBytes;
   bool _removeExistingImage = false;
   bool _isChecked = false;
   bool isLoading = false;
@@ -74,42 +73,62 @@ class _CreateUpdateProdottoState extends State<CreateUpdateProdotto> {
       maxWidth: 1600,
       maxHeight: 1600,
     );
+
     if (image == null) return;
 
-    final File file = File(image.path);
-    final File compressedFile = await compressAndResizeImage(file);
+    final bytes = await image.readAsBytes();
 
     setState(() {
-      _selectedImage = compressedFile;
-      _removeExistingImage =
-          true; // se scelgo una nuova immagine, rimuovo l'url esistente alla salva
+      _imageBytes = bytes;
+      _removeExistingImage = true;
     });
   }
+
+  // Future<void> _open() async {
+
+  //     final XFile? image = await _picker.pickImage(
+  //       source: isCamera ? ImageSource.camera : ImageSource.gallery,
+  //       imageQuality: 85,
+  //       maxWidth: 1600,
+  //       maxHeight: 1600,
+  //     );
+  //     if (image == null) return;
+
+  //     final File file = File(image.path);
+  //     final File compressedFile = await compressAndResizeImage(file);
+
+  //     setState(() {
+  //       _selectedImage = compressedFile;
+  //       _removeExistingImage =
+  //           true; // se scelgo una nuova immagine, rimuovo l'url esistente alla salva
+  //     });
+
+  // }
 
   Future<void> requestPermission(BuildContext context, bool useCamera) async {
     setState(() {
       isCamera = useCamera;
     });
+
+    // 🔥 WEB: salta permessi
+    if (kIsWeb) {
+      await _open();
+      return;
+    }
+
     final permission = useCamera ? Permission.camera : Permission.photos;
     final status = await permission.request();
+
     if (status.isGranted) {
       await _open();
     } else if (status.isPermanentlyDenied) {
       if (context.mounted) {
         AwesomeDialog(
-          dismissOnTouchOutside: false,
-          dismissOnBackKeyPress: false,
           context: context,
           dialogType: DialogType.infoReverse,
-          animType: AnimType.scale,
           title: 'Permesso negato',
-          desc:
-              'Non hai concesso il permesso, vai nelle impostazioni per abilitare l’accesso.',
-          btnOkText: "Vai alle impostazioni",
-          btnOkColor: Colors.green,
-          btnOkOnPress: () {
-            openAppSettings();
-          },
+          desc: 'Vai nelle impostazioni per abilitarlo',
+          btnOkOnPress: () => openAppSettings(),
         ).show();
       }
     }
@@ -283,7 +302,7 @@ class _CreateUpdateProdottoState extends State<CreateUpdateProdotto> {
                                       requestPermission(context, true);
                                     },
                                   ),
-                                  if (_selectedImage != null ||
+                                  if (_imageBytes != null ||
                                       (widget.prodotto?.immagineUrl != null &&
                                           widget
                                               .prodotto!
@@ -295,7 +314,7 @@ class _CreateUpdateProdottoState extends State<CreateUpdateProdotto> {
                                       onTap: () {
                                         Navigator.pop(context);
                                         setState(() {
-                                          _selectedImage = null;
+                                          _imageBytes = null;
                                           _removeExistingImage = true;
                                         });
                                       },
@@ -423,20 +442,20 @@ class _CreateUpdateProdottoState extends State<CreateUpdateProdotto> {
 
   Widget _buildImagePreview() {
     // Priorità: immagine selezionata locale -> immagine esistente (se non marcata per rimozione) -> placeholder
-    if (_selectedImage != null) {
+    if (_imageBytes != null) {
       return Stack(
         fit: StackFit.expand,
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(16),
-            child: Image.file(_selectedImage!, fit: BoxFit.cover),
+            child: Image.memory(_imageBytes!, fit: BoxFit.cover),
           ),
           Positioned(
             top: 8,
             right: 8,
             child: GestureDetector(
               onTap: () => setState(() {
-                _selectedImage = null;
+                _imageBytes = null;
                 _removeExistingImage = true;
               }),
               child: Container(
@@ -532,21 +551,25 @@ class _CreateUpdateProdottoState extends State<CreateUpdateProdotto> {
 
   Future<void> _validateForm(BuildContext context) async {
     if (!_formKey.currentState!.validate()) return;
-    Auth utente = Provider.of<Auth>(context, listen: false);
+
+    final Auth utente = Provider.of<Auth>(context, listen: false);
 
     List<String> immagini = [];
 
-    if (_selectedImage != null) {
-      try {
-        final dataUri = await encodeImageToBase64(_selectedImage!);
-        immagini = [dataUri];
-      } catch (e) {
-        throw Exception('Errore codifica immagine: $e');
-      }
-    } else if (_removeExistingImage) {
+    // 1. nuova immagine (priorità massima)
+    if (_imageBytes != null) {
+      final dataUri = 'data:image/png;base64,${base64Encode(_imageBytes!)}';
+      immagini = [dataUri];
+    }
+    // 2. rimozione immagine
+    else if (_removeExistingImage) {
       immagini = [];
-    } else if (widget.isModifica && widget.prodotto?.immagineUrl != null) {
-      immagini = [widget.prodotto!.immagineUrl ?? ''];
+    }
+    // 3. immagine già esistente (solo se NON rimossa)
+    else if (widget.isModifica &&
+        widget.prodotto?.immagineUrl != null &&
+        widget.prodotto!.immagineUrl!.isNotEmpty) {
+      immagini = [widget.prodotto!.immagineUrl!];
     }
 
     final prodotto = Prodotto(
