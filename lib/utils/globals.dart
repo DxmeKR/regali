@@ -2,7 +2,7 @@ import 'dart:ui';
 
 const String appTitle = '1° Anno Matteo';
 const String headTab =
-    "Questa lista è stata creata per dare un'idea a chiunque voglia fare un regalo.";
+    "Vi lasciamo una lista di idee per il primo compleanno di Matteo, giusto per dare qualche spunto a chi fosse in alto mare con il regalo 😄. Così evitiamo anche doppioni o cose che abbiamo già. Ovviamente, se avete altre idee, sono più che benvenute! 🎉🎁";
 
 // Colori decenti casuali
 const Color notSelected = Color(0xFFE3F2FD); // Blu chiaro
