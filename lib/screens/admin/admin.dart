@@ -37,63 +37,57 @@ class _AdminScreenState extends State<AdminScreen> {
           final listaProdotti = snapshot.data ?? [];
           return MyScaffold(
             body: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Header
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 18.0),
-                        child: IconButton(
-                          onPressed: () => context.go(HomePage.routeName),
-                          icon: Icon(Icons.home, color: Colors.lightBlue),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        MyButton(
+                          onPressed: () => CreateUpdateProdotto.show(context),
+                          icon: Icon(Icons.add),
+                          text: "Aggiungi",
+                          isLoading: isLoading,
+                          width: 120,
+                          height: 40,
+                          margin: EdgeInsets.zero,
                         ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'I tuoi Regali',
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
+                        Row(
+                          spacing: 8,
+                          children: [
+                            MyButton(
+                              onPressed: () => context.go(HomePage.routeName),
+                              icon: Icon(Icons.home, color: Colors.lightBlue),
+                              text: "",
+                              backTextColor: MyButtonColor.secondaryButton,
+                              isLoading: isLoading,
+                              width: 50,
+                              height: 40,
+                              padding: EdgeInsets.zero,
+                              margin: EdgeInsets.zero,
                             ),
-                          ),
-                          Text(
-                            '${listaProdotti.length} elementi in lista',
-                            style: TextStyle(
-                              color: Colors.grey[400],
-                              fontSize: 14,
+                            MyButton(
+                              onPressed: () => Provider.of<Auth>(
+                                context,
+                                listen: false,
+                              ).logout(),
+                              icon: Icon(Icons.logout),
+                              text: "",
+                              backTextColor: MyButtonColor.rosso,
+                              isLoading: isLoading,
+                              width: 50,
+                              height: 40,
+                              padding: EdgeInsets.zero,
+                              margin: EdgeInsets.zero,
                             ),
-                          ),
-                        ],
-                      ),
-                      Spacer(),
-                      MyButton(
-                        onPressed: () => CreateUpdateProdotto.show(context),
-                        icon: Icon(Icons.add),
-                        text: "Aggiungi",
-                        isLoading: isLoading,
-                        width: 120,
-                        height: 40,
-                        margin: EdgeInsets.zero,
-                      ),
-                      SizedBox(width: 16),
-                      MyButton(
-                        onPressed: () =>
-                            Provider.of<Auth>(context, listen: false).logout(),
-                        icon: Icon(Icons.logout),
-                        text: "",
-                        backTextColor: MyButtonColor.rosso,
-                        isLoading: isLoading,
-                        width: 50,
-                        height: 40,
-                        padding: EdgeInsets.zero,
-                        margin: EdgeInsets.zero,
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
 
                   // Lista dei regali (nel tuo caso qui metterai lo StreamBuilder)

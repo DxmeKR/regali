@@ -42,7 +42,7 @@ class ListaHome extends StatelessWidget {
               child: MyFoto(prodotto: prodotto),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
               child: SelectableText(
                 prodotto?.nome ?? '',
                 style: Theme.of(context).textTheme.bodyMedium,

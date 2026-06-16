@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../providers/prodotti.dart';
 // UTILS
 import '../../utils/globals.dart';
-// WIDGETS
 import '../../utils/settings/loading.dart';
+// WIDGETS
 import '../../utils/settings/my_scaffold.dart';
 import './widgtes/lista_home.dart';
 
@@ -32,19 +32,93 @@ class HomePage extends StatelessWidget {
             body: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1100),
               child: Column(
-                mainAxisAlignment: .start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: Text(
-                      headTab,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyMedium!.copyWith(color: Colors.black),
-                      textAlign: TextAlign.center,
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Container(
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 231, 199, 192),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.brown),
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              headTab,
+                              style: Theme.of(context).textTheme.bodyMedium!
+                                  .copyWith(color: Colors.black),
+                              textAlign: TextAlign.start,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          PopupMenuButton<String>(
+                            color: Colors.transparent,
+                            elevation: 0,
+                            icon: const Icon(Icons.help_outline),
+
+                            itemBuilder: (BuildContext context) =>
+                                <PopupMenuEntry<String>>[
+                                  PopupMenuItem<String>(
+                                    enabled: false,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(12),
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey.shade50,
+                                        borderRadius: BorderRadius.circular(8),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 1.5,
+                                        ),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Row(
+                                            spacing: 12,
+                                            children: [
+                                              Text(
+                                                ' Come funziona',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleMedium!
+                                                    .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black87,
+                                                    ),
+                                              ),
+                                            ],
+                                          ),
+                                          Container(
+                                            padding: const EdgeInsets.all(12),
+                                            color: Colors.grey.shade50,
+
+                                            child: const Text(
+                                              '1. Consulta i regali disponibili\n'
+                                              '2. Seleziona quello che desideri\n'
+                                              '3. Selezionando un regalo dalla lista e spuntandolo con "Scegli regalo" lo renderai non disponible agli altri ',
+                                              style: TextStyle(
+                                                fontSize: 13,
+                                                color: Colors.black87,
+                                                height: 1.6,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-
                   // ListView dei regali da inserire
                   Expanded(
                     child: GridView.builder(

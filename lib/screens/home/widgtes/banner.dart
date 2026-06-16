@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+// UTILS
 import '../../../utils/globals.dart';
 
 class BannerHead extends StatelessWidget {
@@ -9,11 +9,13 @@ class BannerHead extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
       height: heightBanner,
       decoration: BoxDecoration(
         color: Colors.brown,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(8),
+          bottomRight: Radius.circular(8),
+        ),
         gradient: LinearGradient(
           colors: [Colors.brown, Colors.orange],
           begin: Alignment.topLeft,

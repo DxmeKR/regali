@@ -1,10 +1,8 @@
 import 'dart:ui';
 
-const String appTitle = 'Lista Regali';
+const String appTitle = '1° Anno Matteo';
 const String headTab =
-    "Questa lista è stata creata per tenere traccia dei regali che vorrei ricevere. "
-    "Spero che possa essere utile a chiunque voglia fare un regalo"
-    "a me o a chiunque altro! Grazie per aver visitato la mia lista dei desideri!";
+    "Questa lista è stata creata per dare un'idea a chiunque voglia fare un regalo.";
 
 // Colori decenti casuali
 const Color notSelected = Color(0xFFE3F2FD); // Blu chiaro
@@ -18,7 +16,7 @@ const Color bgTextFieldChat = Color(0xFFf8f8f8);
 const Color borderColor = Color(0xff633C2A);
 
 const double borderRadius = 8;
-const double heightBanner = 150;
+const double heightBanner = 120;
 const Color primaryColor = Color(0xFF1B4332);
 const Color secondaryColor = Color(0xFF74C69D);
 const Color tertiaryColor = Color(0xFFD8F3DC);

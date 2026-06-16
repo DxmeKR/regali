@@ -356,6 +356,7 @@ class _CreateUpdateProdottoState extends State<CreateUpdateProdotto> {
                   MyTextFormField(
                     bottomMargin: 0,
                     maxLines: 4,
+                    maxLength: 200,
                     titolo: "Descrizione",
                     isTitoloRequired: false,
                     controller: _descrizioneController,

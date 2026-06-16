@@ -24,7 +24,7 @@ final GoRouter myRouter = GoRouter(
         return null;
       },
     ),
-    // PRENOTAZIONE MESSE
+    // HOME
     GoRoute(
       path: HomePage.routeName,
       builder: (context, state) {
@@ -32,16 +32,7 @@ final GoRouter myRouter = GoRouter(
       },
     ),
 
-    //Prodotto
-    // GoRoute(
-    //   path: '/prodotto/:id',
-    //   builder: (context, state) {
-    //     final id = state.pathParameters['id'];
-    //     final prodotto = state.extra as Prodotto?;
-
-    //     return ProdottoPage(idProdotto: id, prodotto: prodotto);
-    //   },
-    // ),
+    // PRODOTTO
     GoRoute(
       path: '${ProdottoPage.routeName}/:id',
       builder: (context, state) {
@@ -49,6 +40,8 @@ final GoRouter myRouter = GoRouter(
         return ProdottoPage(idProdotto: id);
       },
     ),
+
+    // ADMIN
     GoRoute(
       path: AdminScreen.routeName,
       builder: (context, state) {
