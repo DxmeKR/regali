@@ -48,6 +48,13 @@ class ListaHome extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+              child: SelectableText(
+                "€ ${prodotto?.prezzo?.toStringAsFixed(2).replaceAll(".", ",") ?? '0.00'}",
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ),
           ],
         ),
       ),

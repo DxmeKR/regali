@@ -48,12 +48,7 @@ class MyScaffold extends StatelessWidget {
           ],
         ),
       ),
-      body: Column(
-        children: [
-          // BannerHead(),
-          Expanded(child: body),
-        ],
-      ),
+      body: Column(children: [Expanded(child: body)]),
     );
   }
 }
