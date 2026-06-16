@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 // WIDGET
@@ -25,7 +26,8 @@ class MyScaffold extends StatelessWidget {
           children: [
             GestureDetector(
               child: BannerHead(),
-              onDoubleTap: () => context.push(LoginPage.routeName),
+              onDoubleTap: () =>
+                  kIsWeb ? null : context.push(LoginPage.routeName),
             ),
             SafeArea(
               child: !isHome
