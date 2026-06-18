@@ -33,26 +33,28 @@ class ListaHome extends StatelessWidget {
           ],
         ),
         child: Column(
-          mainAxisSize: .min,
-          crossAxisAlignment: .start,
-          spacing: 8,
+          spacing: 6,
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AspectRatio(
               aspectRatio: 16 / 9,
               child: MyFoto(prodotto: prodotto),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: SelectableText(
                 prodotto?.nome ?? '',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
-              child: SelectableText(
-                "€ ${prodotto?.prezzo?.toStringAsFixed(2).replaceAll(".", ",") ?? '0.00'}",
-                style: Theme.of(context).textTheme.bodyMedium,
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: SelectableText(
+                  "€ ${prodotto?.prezzo?.toStringAsFixed(2).replaceAll('.', ',') ?? '0,00'}",
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
               ),
             ),
           ],
