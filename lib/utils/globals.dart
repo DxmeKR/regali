@@ -1,6 +1,7 @@
 import 'dart:ui';
 
-const String appTitle = '1° Anno Matteo';
+const String appTitle = '2° Anno Diana';
+const String titleBanner = 'Diana\'s WISHLIST';
 const String headTab =
     "Vi lasciamo una lista di idee per il primo compleanno di Matteo, giusto per dare qualche spunto a chi fosse in alto mare con il regalo 😄. Così evitiamo anche doppioni o cose che abbiamo già. Ovviamente, se avete altre idee, sono più che benvenute! 🎉🎁";
 

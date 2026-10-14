@@ -11,38 +11,40 @@ class BannerHead extends StatelessWidget {
     return Container(
       height: heightBanner,
       decoration: BoxDecoration(
-        color: Colors.brown,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(8),
           bottomRight: Radius.circular(8),
         ),
-        gradient: LinearGradient(
-          colors: [Colors.brown, Colors.orange],
+        gradient: const LinearGradient(
+          colors: [
+            Color(0xFFD98CA5), // Rosa antico pastello
+            Color(0xFFC58BA8), // Malva pastello
+            Color(0xFFB783A5), // Lilla rosato
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        shape: BoxShape.rectangle,
         boxShadow: [
           BoxShadow(
-            color: Colors.brown.withValues(alpha: 0.5),
+            color: const Color(0xFFB783A5).withValues(alpha: 0.4),
             spreadRadius: 2,
-            blurRadius: 5,
+            blurRadius: 8,
             offset: const Offset(0, 3),
           ),
         ],
       ),
-
       child: Center(
         child: Text(
-          'Matteo\'s WISHLIST',
+          titleBanner,
+          textAlign: TextAlign.center,
           style: GoogleFonts.anton(
             fontSize: 40,
-            color: const Color.fromARGB(255, 231, 199, 192),
+            color: const Color(0xFFFFF0F4), // Rosa molto chiaro
             letterSpacing: 1.2,
             shadows: [
               Shadow(
-                blurRadius: 6,
-                color: Colors.brown.withValues(alpha: 0.3),
+                blurRadius: 5,
+                color: const Color(0xFF713B59).withValues(alpha: 0.4),
                 offset: const Offset(2, 2),
               ),
             ],

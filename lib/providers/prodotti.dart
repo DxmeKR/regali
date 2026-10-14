@@ -14,9 +14,9 @@ class Prodotti {
   Stream<List<Prodotto>> fetchAll({bool onlyAvailable = false}) {
     try {
       Query query = FirebaseFirestore.instance.collectionGroup('prodotti');
-      // if (onlyAvailable) {
-      //   query = query.where('isChecked', isEqualTo: false);
-      // }
+      if (onlyAvailable) {
+        query = query.where('isChecked', isEqualTo: false);
+      }
       return query.snapshots().map((QuerySnapshot snapshot) {
         final list = snapshot.docs.map((doc) {
           // recupera l'uid dal path: prodottoUtente/{uid}/prodotti/{docId}

@@ -12,6 +12,7 @@ import '../../utils/settings/my_scaffold.dart';
 import '../home/home.dart';
 import './widget/card_lista.dart';
 import './widget/create_update_prodotto.dart';
+import 'cms_dialog.dart';
 
 class AdminScreen extends StatefulWidget {
   static const String routeName = '/admin/home';
@@ -64,6 +65,21 @@ class _AdminScreenState extends State<AdminScreen> {
                               icon: Icon(Icons.home, color: Colors.lightBlue),
                               text: "",
                               backTextColor: MyButtonColor.secondaryButton,
+                              isLoading: isLoading,
+                              width: 50,
+                              height: 40,
+                              padding: EdgeInsets.zero,
+                              margin: EdgeInsets.zero,
+                            ),
+                            MyButton(
+                              onPressed: () =>
+                                  ImpostazioniDialog.show(context, auth.uid!),
+                              icon: const Icon(
+                                Icons.settings,
+                                color: Colors.grey,
+                              ),
+                              text: "",
+                              backTextColor: MyButtonColor.info,
                               isLoading: isLoading,
                               width: 50,
                               height: 40,

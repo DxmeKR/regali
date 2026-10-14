@@ -129,7 +129,7 @@ class MyButtonColor {
   });
 
   static const MyButtonColor defaultColor = MyButtonColor(
-    backgroundColor: Color(0xFF4CAF50), // Verde decente
+    backgroundColor: Color(0xFF4CAF50),
     fontColor: Colors.white,
     backgroundColorHover: notSelected,
     fontColorHover: Colors.white,
@@ -141,12 +141,12 @@ class MyButtonColor {
     fontColorHover: Colors.white,
   );
 
-  static const MyButtonColor messe = MyButtonColor(
+  static const MyButtonColor info = MyButtonColor(
     backgroundColor: Colors.white,
-    fontColor: itemSelected,
-    backgroundColorHover: itemSelected,
+    fontColor: Color(0xFF757575),
+    backgroundColorHover: Color(0xFF757575),
     fontColorHover: Colors.white,
-    borderColorHover: itemSelected,
+    borderColorHover: Color(0xFF757575),
   );
   static const MyButtonColor rosso = MyButtonColor(
     backgroundColor: Colors.white,

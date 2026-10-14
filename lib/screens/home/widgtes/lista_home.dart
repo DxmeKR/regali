@@ -41,11 +41,13 @@ class ListaHome extends StatelessWidget {
               aspectRatio: 16 / 9,
               child: MyFoto(prodotto: prodotto),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: SelectableText(
-                prodotto?.nome ?? '',
-                style: Theme.of(context).textTheme.bodyMedium,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: SelectableText(
+                  prodotto?.nome ?? '',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
               ),
             ),
             Flexible(

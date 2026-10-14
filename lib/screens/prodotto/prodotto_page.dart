@@ -120,7 +120,7 @@ class _ProdottoPageState extends State<ProdottoPage> {
                                 ? "E' stato scelto"
                                 : "Scegli regalo",
                             backTextColor: _isUnavailable
-                                ? MyButtonColor.messe
+                                ? MyButtonColor.info
                                 : MyButtonColor.rosso,
                             onPressed: _isUnavailable
                                 ? null
@@ -133,7 +133,7 @@ class _ProdottoPageState extends State<ProdottoPage> {
                         Expanded(
                           child: MyButton(
                             text: "Vai al sito",
-                            backTextColor: MyButtonColor.messe,
+                            backTextColor: MyButtonColor.info,
                             onPressed: () => _openUrl(prodotto.url!),
                           ),
                         ),
